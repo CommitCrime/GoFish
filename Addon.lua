@@ -85,6 +85,7 @@ local function IsFishingPoleEquipped()
 end
 
 local function EnhanceSounds()
+	print("enhance sound")
 	if GoFishDB.SoundInBG then
 		soundInBg = GetCVar("Sound_EnableSoundWhenGameIsInBG")
 		SetCVar("Sound_EnableSoundWhenGameIsInBG", "1")
@@ -106,6 +107,7 @@ local function EnhanceSounds()
 end
 
 local function RestoreSounds()
+	print("restore sounds")
 	if soundInBg and GoFishDB.SoundInBG then
 		SetCVar("Sound_EnableSoundWhenGameIsInBG", soundInBg)
 		soundInBg = nil
@@ -223,8 +225,10 @@ end
 function GoFish:ToggleFishingMode()
 	if isFishing then
 		self:DisableFishingMode()
+		RestoreSounds()
 	else
 		self:EnableFishingMode()
+		EnhanceSounds()
 	end
 end
 
@@ -304,8 +308,8 @@ end
 
 function GoFish:UNIT_SPELLCAST_CHANNEL_START(unit, spell)
 	if spell == FISHING then
-		--print("Fishing START")
-		EnhanceSounds()
+		print("Fishing START")
+		--EnhanceSounds()
 		if autoStopTime then
 			autoStopTime = GetTime() + 1000000
 		end
@@ -314,8 +318,8 @@ end
 
 function GoFish:UNIT_SPELLCAST_CHANNEL_STOP(unit, spell)
 	if spell == FISHING then
-		--print("Fishing STOP")
-		RestoreSounds()
+		print("Fishing STOP")
+		--RestoreSounds()
 		if autoStopTime then
 			autoStopTime = GetTime() + GoFishDB.MouseoverTimeout
 		end

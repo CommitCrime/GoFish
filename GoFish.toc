@@ -1,5 +1,5 @@
 ## Interface: 70300
-## Version: @project-version@
+## Version: 7.3.0.1
 
 ## Title: GoFish
 ## Notes: Click-cast fishing and enhanced fishing sounds.
